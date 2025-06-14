@@ -1,0 +1,20 @@
+model: "tacotron2"
+run_name: "tacotron2_run_fixed"
+output_path: "D:/programs/python/Machine Learning/Text to speech 2/output"
+
+datasets:
+  - formatter: "ljspeech"
+    path: "D:/programs/python/Machine Learning/Text to speech 2"
+    meta_file_train: "metadata.csv"
+    meta_file_val: "metadata.csv"
+
+audio:
+  sample_rate: 22050
+
+trainer:
+  epochs: 30
+  batch_size: 16
+  eval_batch_size: 16
+  grad_clip: 1.0
+  lr: 0.001
+  mixed_precision: True

@@ -1,0 +1,95 @@
+🧪 Full Breakdown of EVAL PERFORMANCE Metrics
+🕐 avg_loader_time
+Copy
+Edit
+0.47068088395254953
+What it means:
+How much time (in seconds) it takes to load each batch during evaluation.
+✅ Lower is better, but it’s not a quality metric — just how fast your system is reading data.
+
+🎧 avg_decoder_loss
+Copy
+Edit
+0.8721227305276054
+What it means:
+This is the main loss from predicting the mel-spectrogram from text.
+It measures how close the predicted audio features are to the ground truth.
+✅ Lower = better voice accuracy and pronunciation.
+
+🎛 avg_postnet_loss
+Copy
+Edit
+0.919401364667075
+What it means:
+This measures error after refinement by the post-net (a small CNN that improves mel prediction).
+✅ Should reduce over time.
+It should be similar to decoder_loss, sometimes slightly better.
+
+🛑 avg_stopnet_loss
+Copy
+Edit
+0.036844427564314434
+What it means:
+Measures how well the model predicts when to stop speaking.
+✅ Lower is better.
+If it's too high, the model might:
+Talk too long
+Get stuck at max_decoder_steps
+
+🧬 avg_ga_loss
+Copy
+Edit
+0.005270678949143205
+What it means:
+Guided Attention Loss — helps force the attention to move diagonally (word-by-word, left-to-right).
+✅ Low values mean your attention is learning properly.
+Important for good pronunciation and natural prosody.
+
+🎼 avg_decoder_diff_spec_loss
+Copy
+Edit
+0.07337211285318647
+🎼 avg_postnet_diff_spec_loss
+Copy
+Edit
+0.07356483169964381
+What they mean:
+These compare the difference in spectrogram shape (structure) between real and predicted ones.
+✅ Lower values mean mel structure is more natural, improving intonation, clarity, and speech patterns.
+
+📷 avg_decoder_ssim_loss
+Copy
+Edit
+0.6625806093215942
+📷 avg_postnet_ssim_loss
+Copy
+Edit
+0.739646886076246
+What they mean:
+SSIM (Structural Similarity Index) between real and generated mel spectrograms.
+✅ Higher = better match.
+⚠️ Unlike others, this is better when it’s HIGHER (near 1.0 is ideal).
+It measures overall pattern similarity — useful for voice naturalness.
+
+📉 avg_loss
+Copy
+Edit
+0.8983699679374695
+What it means:
+This is the total weighted loss — combines decoder, postnet, stopnet, GA, etc.
+✅ This is the main number you want to reduce over time.
+Usually the best indicator of overall model improvement.
+
+🎯 avg_align_error
+Copy
+Edit
+0.9564788809844426
+What it means:
+Measures how well the attention alignment is learning.
+This controls how the model matches text tokens to time in audio.
+✅ Lower = better alignment = clearer speech.
+If this is too high, attention may:
+Get stuck
+Skip words
+Speak out of order
+
